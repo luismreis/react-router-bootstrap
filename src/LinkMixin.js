@@ -19,7 +19,7 @@ export default {
     onClick: React.PropTypes.func
   },
   contextTypes: {
-    router: React.PropTypes.func.isRequired
+    history: React.PropTypes.func.isRequired
   },
 
   getDefaultProps() {
@@ -30,7 +30,7 @@ export default {
 
   /**
    * Returns props except those used by this Mixin
-   * Gets "active" from router if needed.
+   * Gets "active" from context.history if needed.
    * Gets the value of the "href" attribute to use on the DOM element.
    * Sets "onClick" to "handleRouteTo".
    */
@@ -43,10 +43,10 @@ export default {
     } = this.props;
 
     if (this.props.active === undefined) {
-      props.active = this.context.router.isActive(to, params, query);
+      props.active = this.context.history.isActive(to, params, query);
     }
 
-    props.href = this.context.router.makeHref(to, params, query);
+    props.href = this.context.history.makeHref(to, params, query);
 
     props.onClick = this.handleRouteTo;
 
@@ -77,7 +77,7 @@ export default {
     event.preventDefault();
 
     if (allowTransition) {
-      this.context.router.transitionTo(this.props.to, this.props.params, this.props.query);
+      this.context.history.transitionTo(this.props.to, this.props.params, this.props.query);
     }
   }
 };
