@@ -46,7 +46,9 @@ export default {
       props.active = this.context.history.isActive(to, params, query);
     }
 
-    props.href = this.context.history.makeHref(to, params, query);
+    console.log(this.context.history)
+
+    props.href = this.context.history.createHref(to, params, query);
 
     props.onClick = this.handleRouteTo;
 
